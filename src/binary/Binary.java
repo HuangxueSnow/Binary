@@ -20,44 +20,36 @@ public class Binary {
         // TODO code application logic here
         Scanner reader = new Scanner(System.in);
         int n = reader.nextInt();
-        if (n <= 20 && n>=1){
+        
             String s;
-            String NumArray[] = new String [n];
             for(int i = 0; i < n; i++){
-                String a = reader.next();
+                int a = reader.nextInt();
                 s = Binary(a);
-                NumArray[i] = s;
+                int count = s.length()/4;
+                System.out.print(s.substring(0, 4));
+                for(i = 1; i < count; i++){
+                    int m = 4*i;
+                    System.out.print(" "+s.substring(m, m+4));
+                }
+                System.out.println();
             }
-            for(int j = 0; j < n; j++){
-                System.out.println(NumArray[j]);
-            }
-        }
+            
+
         
     }
-     private static String Binary(String a) {
-         int b = Integer.parseInt(a);
-         int c;
-         int e = 0;
-         int f = 0;
+     private static String Binary(int b) {
+         
          String d = "";
-         while(b != 0){
-             c = b % 2;
-             if(c == 0){
-                 b = b/2;
-                 String o = "0";
-                 d = d+o;
-             }else{
-                 b = (b-1)/2;
-                 String l = "1";
-                 d = d+l;
-             }
-             e += 1;
-             f = e %4;
-             if(f == 0){
-                 String q = " ";
-                 d = d + q;
-             }
-         }
+         do {
+             d=b%2+d;
+             b=b/2;
+         } while (b!=0);
+        
+         int l=4-d.length()%4;
+         if (l==4) l=0;
+         for (int i=0;i<l;i++) 
+             d="0"+d;
+         
          return d;
      }
     

@@ -6,6 +6,7 @@
 package binary;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  *
@@ -24,33 +25,23 @@ public class Binary {
             String s;
             for(int i = 0; i < n; i++){
                 int a = reader.nextInt();
-                s = Binary(a);
-                int count = s.length()/4;
-                System.out.print(s.substring(0, 4));
-                for(i = 1; i < count; i++){
-                    int m = 4*i;
-                    System.out.print(" "+s.substring(m, m+4));
-                }
-                System.out.println();
+                printHex(a);
             }
-            
-
-        
     }
-     private static String Binary(int b) {
-         
-         String d = "";
-         do {
-             d=b%2+d;
-             b=b/2;
-         } while (b!=0);
+
+    private static void printHex(int a) 
+    {
+        Stack stack=new Stack();
+        Integer b=a;
+        do {
+            Integer r=b%16;
+            stack.push(r);
+            b=b/16;
+        } while (b!=0);
         
-         int l=4-d.length()%4;
-         if (l==4) l=0;
-         for (int i=0;i<l;i++) 
-             d="0"+d;
-         
-         return d;
-     }
-    
+        while (!stack.empty()) {
+            b=(Integer)stack.pop();
+            System.out.print(String.format("%4s",Integer.toBinaryString(b)).replace(" ", "0")+" ");
+        }
+    }
 }
